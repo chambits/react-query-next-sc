@@ -1,6 +1,6 @@
 // lib/getShoes.ts
 export async function getShoes(filter: string): Promise<string[]> {
-  console.log(`🚀 getShoes called with filter: ${filter}`);
+  console.log(`🚀 getShoes called on server with filter: ${filter}`);
 
   // Simulated fetch delay to make cache testing easier
   await new Promise((res) => setTimeout(res, 1000));

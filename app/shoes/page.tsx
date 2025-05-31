@@ -18,8 +18,10 @@ export default async function ShoesPage({
   });
 
   return (
-    <HydrationBoundary state={dehydrate(queryClient)}>
-      <ShoesClient filter={filter} />
-    </HydrationBoundary>
+    <div className="min-h-screen w-full bg-gradient-to-b from-gray-50 to-white">
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <ShoesClient filter={filter} />
+      </HydrationBoundary>
+    </div>
   );
 }

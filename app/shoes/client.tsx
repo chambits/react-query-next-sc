@@ -1,8 +1,8 @@
 "use client";
-
 import { useQuery } from "@tanstack/react-query";
 import { getShoes } from "@/lib/getShoes";
 import { useRouter, useSearchParams } from "next/navigation";
+import Link from "next/link";
 
 interface ShoesClientProps {
   filter: string;
@@ -21,7 +21,14 @@ export function ShoesClient({ filter }: ShoesClientProps) {
   } = useQuery({
     queryKey: ["shoes", filter],
     queryFn: () => {
-      console.log(`🔄 Fetching shoes for filter: ${filter}`);
+      // This log might not appear for initial page load due to SSR prefetching!
+      // Since the data is already in the cache from server prefetching,
+      // the client-side queryFn never actually runs for the initial load.
+      // It only runs when:
+      // - The cache becomes stale (after 60 seconds)
+      // - You change the filter (which creates a new query key)
+      // - You manually invalidate the cache
+      console.log(`🔄 Fetching shoes on client for filter: ${filter}`);
       return getShoes(filter);
     },
     staleTime: 60 * 1000, // 1 minute
@@ -45,16 +52,30 @@ export function ShoesClient({ filter }: ShoesClientProps) {
   ];
 
   return (
-    <div className="max-w-5xl mx-auto p-6 bg-gradient-to-b from-gray-50 to-white min-h-screen">
+    <div className="w-full px-6 py-6 md:py-8 lg:px-8">
       <div className="flex flex-col md:flex-row md:items-center justify-between mb-10">
         <h1 className="text-4xl font-bold text-gray-900 mb-2 md:mb-0 tracking-tight">
           <span className="text-blue-600">Shoe</span>Collection
         </h1>
 
-        <div className="flex space-x-2 items-center bg-blue-50 px-3 py-1.5 rounded-full text-sm text-blue-700">
-          <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse"></div>
-          <span>Cache status: {isStale ? "Stale" : "Fresh"}</span>
-        </div>
+        <Link
+          href="/"
+          className="inline-flex items-center text-blue-600 hover:text-blue-700 transition-colors"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-5 w-5 mr-1"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fillRule="evenodd"
+              d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z"
+              clipRule="evenodd"
+            />
+          </svg>
+          Back to Home
+        </Link>
       </div>
 
       {/* Filter Buttons */}
@@ -156,6 +177,14 @@ export function ShoesClient({ filter }: ShoesClientProps) {
               }`}
             >
               {isStale ? "⚠️ Yes" : "✅ No"}
+            </span>
+          </div>
+          <div className="p-4 flex flex-col">
+            <span className="text-xs uppercase text-gray-500 mb-1">
+              Query Key
+            </span>
+            <span className="px-2 py-1 bg-blue-100 text-blue-800 rounded text-center font-medium text-xs">
+              [&quot;shoes&quot;, &quot;{filter}&quot;]
             </span>
           </div>
         </div>
