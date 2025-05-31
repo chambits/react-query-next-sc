@@ -1,6 +1,6 @@
 "use client";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { getShoesInfinite, ShoeProduct } from "@/lib/getShoesInfinite";
+import { getShoesInfinite, ShoeProduct } from "@/lib/data/getShoesInfinite";
 import { useEffect, useRef } from "react";
 import Link from "next/link";
 import React from "react";

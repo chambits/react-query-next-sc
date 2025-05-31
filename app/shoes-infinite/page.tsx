@@ -1,6 +1,6 @@
 import { getQueryClient } from "@/utils/queryClient";
 import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
-import { getShoesInfinite } from "@/lib/getShoesInfinite";
+import { getShoesInfinite } from "@/lib/data/getShoesInfinite";
 import { ShoesInfiniteClient } from "./client";
 
 export default async function ShoesInfinitePage() {

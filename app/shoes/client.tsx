@@ -1,6 +1,6 @@
 "use client";
 import { useQuery } from "@tanstack/react-query";
-import { getShoes } from "@/lib/getShoes";
+import { getShoes } from "@/lib/data/getShoes";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 

@@ -1,14 +1,18 @@
 import { getQueryClient } from "@/utils/queryClient";
 import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
-import { getShoes } from "@/lib/getShoes";
+import { getShoes } from "@/lib/data/getShoes";
 import { ShoesClient } from "./client";
 
-export default async function ShoesPage({
-  searchParams,
-}: {
-  searchParams: { filter?: string };
-}) {
-  const filter = searchParams.filter || "all";
+interface PageProps {
+  searchParams: Promise<{ filter?: string }> | { filter?: string };
+}
+
+export default async function ShoesPage({ searchParams }: PageProps) {
+  // Await searchParams if it's a promise
+  const resolvedParams =
+    searchParams instanceof Promise ? await searchParams : searchParams;
+  const filter = resolvedParams.filter || "all";
+
   const queryClient = getQueryClient();
 
   // ✅ Prefetch data on the server
