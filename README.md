@@ -2,8 +2,6 @@
 
 A practical demonstration of React Query with Next.js App Router for efficient server and client-side data fetching, caching, and state management.
 
-![React Query + Next.js](https://tanstack.com/query.png)
-
 ## Features
 
 - ⚡ **Server-side prefetching** - Data ready on initial page load
