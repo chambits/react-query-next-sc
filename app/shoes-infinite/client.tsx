@@ -26,7 +26,6 @@ export function ShoesInfiniteClient() {
     },
     initialPageParam: 1,
     getNextPageParam: (lastPage) => lastPage.nextPage,
-    staleTime: 60 * 1000, // 1 minute
   });
 
   // Set up intersection observer for infinite scrolling

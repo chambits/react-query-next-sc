@@ -34,7 +34,6 @@ export function ShoesClient({ filter }: ShoesClientProps) {
       console.log(`🔄 Fetching shoes on client for filter: ${filter}`);
       return getShoes(filter);
     },
-    staleTime: 60 * 1000,
   });
 
   const handleFilterChange = (newFilter: string) => {
