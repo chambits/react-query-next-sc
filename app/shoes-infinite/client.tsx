@@ -61,7 +61,7 @@ export function ShoesInfiniteClient() {
     <div className="w-full px-6 py-6 md:py-8 lg:px-8">
       <div className="flex flex-col md:flex-row md:items-center justify-between mb-8">
         <h1 className="text-4xl font-bold text-gray-900 mb-2 md:mb-0 tracking-tight">
-          <span className="text-purple-600">Infinite</span>Shoes
+          <span className="text-purple-600">Shoe</span>Collection
         </h1>
 
         <Link

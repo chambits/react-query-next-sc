@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getShoes } from "@/lib/data/getShoes";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
+import { useTransition, useState } from "react";
 
 interface ShoesClientProps {
   filter: string;
@@ -11,6 +12,8 @@ interface ShoesClientProps {
 export function ShoesClient({ filter }: ShoesClientProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const [isPending, startTransition] = useTransition();
+  const [activeFilter, setActiveFilter] = useState(filter);
 
   const {
     data: shoes,
@@ -31,17 +34,23 @@ export function ShoesClient({ filter }: ShoesClientProps) {
       console.log(`🔄 Fetching shoes on client for filter: ${filter}`);
       return getShoes(filter);
     },
-    staleTime: 60 * 1000, // 1 minute
+    staleTime: 60 * 1000,
   });
 
   const handleFilterChange = (newFilter: string) => {
-    const params = new URLSearchParams(searchParams.toString());
-    if (newFilter === "all") {
-      params.delete("filter");
-    } else {
-      params.set("filter", newFilter);
-    }
-    router.push(`/shoes?${params.toString()}`);
+    // Update the UI immediately
+    setActiveFilter(newFilter);
+
+    // Then update the URL in a transition
+    startTransition(() => {
+      const params = new URLSearchParams(searchParams.toString());
+      if (newFilter === "all") {
+        params.delete("filter");
+      } else {
+        params.set("filter", newFilter);
+      }
+      router.push(`/shoes?${params.toString()}`);
+    });
   };
 
   const filters = [
@@ -93,18 +102,23 @@ export function ShoesClient({ filter }: ShoesClientProps) {
               clipRule="evenodd"
             />
           </svg>
-          Filter Collection
+          Filter Collection{" "}
+          {isPending && (
+            <span className="ml-2 text-blue-500 text-sm">(Updating...)</span>
+          )}
         </h2>
         <div className="flex gap-3 flex-wrap">
           {filters.map((filterOption) => (
             <button
               key={filterOption.key}
               onClick={() => handleFilterChange(filterOption.key)}
+              disabled={isPending}
               className={`px-6 py-3 rounded-xl flex items-center gap-2 transition-all duration-300 ${
-                filter === filterOption.key
+                // Show active state based on local state for immediate feedback
+                activeFilter === filterOption.key
                   ? "bg-blue-500 text-white shadow-lg shadow-blue-200 transform scale-105"
                   : "bg-white text-gray-700 border border-gray-200 hover:bg-blue-50 hover:border-blue-300 hover:shadow"
-              }`}
+              } ${isPending ? "opacity-70" : ""}`}
             >
               <span>{filterOption.icon}</span>
               <span className="font-medium">{filterOption.label}</span>

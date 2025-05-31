@@ -247,34 +247,36 @@ export default function Home() {
         </div>
 
         {/* Footer */}
-        <footer className="mt-12 pt-6 border-t border-gray-200 text-center text-gray-500 text-sm">
-          <p>Built with Next.js, React Query, and Tailwind CSS</p>
-          <p className="mt-1 text-gray-600">Created by Chamith Madusanka</p>
-          <div className="flex justify-center gap-4 mt-3">
-            <a
-              href="https://nextjs.org/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-600 hover:text-gray-900"
-            >
-              Next.js
-            </a>
-            <a
-              href="https://tanstack.com/query/latest"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-600 hover:text-gray-900"
-            >
-              React Query
-            </a>
-            <a
-              href="https://tailwindcss.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-600 hover:text-gray-900"
-            >
-              Tailwind CSS
-            </a>
+        <footer className="mt-12 pt-8 border-t border-gray-200 text-center">
+          <div className="flex flex-col items-center">
+            <div className="flex items-center space-x-2 mb-4">
+              <span className="inline-block h-3 w-3 rounded-full bg-blue-500"></span>
+              <span className="inline-block h-3 w-3 rounded-full bg-purple-500"></span>
+              <span className="inline-block h-3 w-3 rounded-full bg-green-500"></span>
+            </div>
+
+            <p className="text-gray-700 font-medium mb-2">
+              Built with
+              <span className="mx-1 text-blue-600">Next.js</span>•
+              <span className="mx-1 text-purple-600">React Query</span>•
+              <span className="mx-1 text-green-600">Tailwind CSS</span>
+            </p>
+
+            <div className="mt-3 mb-4 flex items-center">
+              <div className="h-px w-12 bg-gray-200"></div>
+              <p className="mx-3 text-gray-600 text-sm">
+                Created by{" "}
+                <a
+                  href="https://www.linkedin.com/in/chamith24/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-medium hover:text-blue-600 transition-colors"
+                >
+                  Chamith Madusanka
+                </a>
+              </p>
+              <div className="h-px w-12 bg-gray-200"></div>
+            </div>
           </div>
         </footer>
       </div>
