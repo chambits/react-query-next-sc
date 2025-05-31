@@ -3,18 +3,14 @@ import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
 import { getShoes } from "@/lib/data/getShoes";
 import { ShoesClient } from "./client";
 
-export default async function ShoesPage({
-  searchParams,
-}: {
-  searchParams?: { [key: string]: string | string[] | undefined };
-}) {
-  // Use proper type checking and default to "all" if filter is undefined
-  const filterParam = searchParams?.filter;
-  const filter = typeof filterParam === "string" ? filterParam : "all";
+interface ShoesPageProps {
+  searchParams?: Promise<{ filter?: string }>;
+}
 
+export default async function ShoesPage({ searchParams }: ShoesPageProps) {
+  const filter = (await searchParams)?.filter || "all";
   const queryClient = getQueryClient();
 
-  // ✅ Prefetch data on the server
   await queryClient.prefetchQuery({
     queryKey: ["shoes", filter],
     queryFn: () => getShoes(filter),
