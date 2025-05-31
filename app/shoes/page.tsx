@@ -3,15 +3,14 @@ import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
 import { getShoes } from "@/lib/data/getShoes";
 import { ShoesClient } from "./client";
 
-interface PageProps {
-  searchParams: Promise<{ filter?: string }> | { filter?: string };
-}
-
-export default async function ShoesPage({ searchParams }: PageProps) {
-  // Await searchParams if it's a promise
-  const resolvedParams =
-    searchParams instanceof Promise ? await searchParams : searchParams;
-  const filter = resolvedParams.filter || "all";
+export default async function ShoesPage({
+  searchParams,
+}: {
+  searchParams?: { [key: string]: string | string[] | undefined };
+}) {
+  // Use proper type checking and default to "all" if filter is undefined
+  const filterParam = searchParams?.filter;
+  const filter = typeof filterParam === "string" ? filterParam : "all";
 
   const queryClient = getQueryClient();
 
