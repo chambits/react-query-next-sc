@@ -43,6 +43,11 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - Try different filters to see caching in action
 - Watch network requests in browser DevTools
 - See how data is served from cache vs fetched
+- Check React Query DevTools panel (bottom-right corner) to monitor:
+  - Active queries and their states
+  - Query cache contents
+  - Refetch timing and stale status
+  - Cache persistence between navigation
 
 ## Tech Stack
 
