@@ -4,17 +4,52 @@ import { Metadata } from "next";
 
 // Define metadata for SEO
 export const metadata: Metadata = {
-  title: "React Query + Next.js | Data Fetching & Caching Examples",
+  title: "React Query + Next.js Examples | Data Fetching & Caching",
   description:
-    "Interactive examples demonstrating React Query with Next.js App Router for efficient server/client data fetching, caching, and state management.",
+    "Practical examples demonstrating React Query with Next.js App Router for efficient server and client-side data fetching, caching, and state management.",
   keywords:
-    "React Query, Next.js, TanStack Query, data fetching, caching, server components",
+    "React Query, Next.js, data fetching, caching, server components, client components, TanStack Query",
   openGraph: {
     title: "React Query + Next.js Examples",
     description:
-      "Learn efficient data fetching patterns with React Query and Next.js",
+      "Learn how to implement efficient data fetching and caching with React Query and Next.js",
+    url: "https://react-query-next-sc.vercel.app",
+    siteName: "React Query Next.js Examples",
+    images: [
+      {
+        url: "https://react-query-next-sc.vercel.app/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "React Query + Next.js Examples",
+      },
+    ],
+    locale: "en_US",
     type: "website",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "React Query + Next.js Examples",
+    description:
+      "Learn how to implement efficient data fetching and caching with React Query and Next.js",
+    images: ["https://react-query-next-sc.vercel.app/og-image.png"],
+    creator: "@chamith24",
+  },
+  authors: [
+    {
+      name: "Chamith Madusanka",
+      url: "https://www.linkedin.com/in/chamith24/",
+    },
+  ],
+  creator: "Chamith Madusanka",
+  publisher: "Chamith Madusanka",
+  robots: {
+    index: true,
+    follow: true,
+  },
+  alternates: {
+    canonical: "https://react-query-next-sc.vercel.app",
+  },
+  metadataBase: new URL("https://react-query-next-sc.vercel.app"),
 };
 
 export default function Home() {
