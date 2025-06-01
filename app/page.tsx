@@ -1,5 +1,21 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Metadata } from "next";
+
+// Define metadata for SEO
+export const metadata: Metadata = {
+  title: "React Query + Next.js | Data Fetching & Caching Examples",
+  description:
+    "Interactive examples demonstrating React Query with Next.js App Router for efficient server/client data fetching, caching, and state management.",
+  keywords:
+    "React Query, Next.js, TanStack Query, data fetching, caching, server components",
+  openGraph: {
+    title: "React Query + Next.js Examples",
+    description:
+      "Learn efficient data fetching patterns with React Query and Next.js",
+    type: "website",
+  },
+};
 
 export default function Home() {
   return (
@@ -33,22 +49,51 @@ export default function Home() {
               TanStack Query Docs
             </a>
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 relative">
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-blue-400">
-              React Query
-            </span>
-            <span className="mx-2">+</span>
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-black to-gray-700">
-              Next.js
-            </span>
-            <span className="absolute -bottom-2 left-0 w-20 h-1 bg-blue-500 rounded-full"></span>
-            <span className="text-3xl text-blue-600 ml-2">⚡</span>
-          </h1>
-          <p className="text-lg text-gray-600 max-w-3xl">
-            A practical example demonstrating React Query with Next.js App
-            Router for efficient server and client-side data fetching, caching,
-            and state management.
-          </p>
+
+          {/* Enhanced Title Section */}
+          <div className="mb-8 relative overflow-hidden">
+            <div className="absolute -right-16 -top-16 w-64 h-64 bg-blue-100 rounded-full opacity-20 blur-3xl"></div>
+            <div className="absolute -left-16 -bottom-16 w-64 h-64 bg-purple-100 rounded-full opacity-20 blur-3xl"></div>
+
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 relative">
+              <div className="flex flex-wrap items-center gap-2 mb-2">
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-blue-400">
+                  React Query
+                </span>
+                <span className="mx-1 text-3xl text-blue-500">+</span>
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-black to-gray-700">
+                  Next.js
+                </span>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-3 mt-3">
+                <span className="px-4 py-1 bg-blue-50 text-blue-700 rounded-full text-base md:text-xl shadow-sm border border-blue-100">
+                  Data Fetching
+                </span>
+                <span className="px-4 py-1 bg-purple-50 text-purple-700 rounded-full text-base md:text-xl shadow-sm border border-purple-100">
+                  Caching
+                </span>
+                <span className="px-4 py-1 bg-green-50 text-green-700 rounded-full text-base md:text-xl shadow-sm border border-green-100">
+                  State Management
+                </span>
+              </div>
+            </h1>
+
+            <p className="text-lg text-gray-600 max-w-3xl relative z-10">
+              Interactive examples demonstrating how to build performant
+              applications with
+              <span className="font-semibold text-blue-600">
+                {" "}
+                React Query
+              </span>{" "}
+              and
+              <span className="font-semibold text-black">
+                {" "}
+                Next.js App Router
+              </span>{" "}
+              for efficient server and client-side data operations.
+            </p>
+          </div>
         </header>
 
         {/* Main Example Card */}
