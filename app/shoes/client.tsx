@@ -34,7 +34,46 @@ export function ShoesClient({ filter }: ShoesClientProps) {
       console.log(`🔄 Fetching shoes on client for filter: ${filter}`);
       return getShoes(filter);
     },
+    staleTime: 60 * 1000, // Data becomes stale after 1 minute
   });
+
+  // Add informative description about caching behavior
+  const cachingDescription = (
+    <div className="mb-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg text-sm">
+      <h3 className="font-semibold text-yellow-800 mb-2">How Caching Works:</h3>
+      <ul className="space-y-2 text-yellow-700">
+        <li className="flex items-start">
+          <span className="font-bold mr-1">•</span>
+          <span>
+            <b>Initial Load:</b> Data is prefetched on the server and sent to
+            the client. No client-side fetch occurs.
+          </span>
+        </li>
+        <li className="flex items-start">
+          <span className="font-bold mr-1">•</span>
+          <span>
+            <b>Switching Filters:</b> Creates a new query key, causing a fetch
+            for that specific filter if not in cache.
+          </span>
+        </li>
+        <li className="flex items-start">
+          <span className="font-bold mr-1">•</span>
+          <span>
+            <b>Cache Invalidation:</b> After 60 seconds (staleTime), the data
+            becomes stale but is still shown. A background refetch happens when
+            you visit the page again.
+          </span>
+        </li>
+        <li className="flex items-start">
+          <span className="font-bold mr-1">•</span>
+          <span>
+            <b>Navigation:</b> Returning to a filter you&apos;ve already seen
+            uses cached data if available and not stale.
+          </span>
+        </li>
+      </ul>
+    </div>
+  );
 
   const handleFilterChange = (newFilter: string) => {
     // Update the UI immediately
@@ -63,16 +102,16 @@ export function ShoesClient({ filter }: ShoesClientProps) {
     <div className="w-full px-6 py-6 md:py-8 lg:px-8">
       <div className="flex flex-col md:flex-row md:items-center justify-between mb-10">
         <h1 className="text-4xl font-bold text-gray-900 mb-2 md:mb-0 tracking-tight">
-          <span className="text-blue-600">Shoe</span>Collection
+          <span className="text-blue-600">React Query</span> Filter Example
         </h1>
 
         <Link
           href="/"
-          className="inline-flex items-center text-blue-600 hover:text-blue-700 transition-colors"
+          className="inline-flex items-center gap-1 px-4 py-2 bg-blue-100 text-blue-700 rounded-lg hover:bg-blue-200 transition-colors"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5 mr-1"
+            className="h-5 w-5"
             viewBox="0 0 20 20"
             fill="currentColor"
           >
@@ -82,9 +121,11 @@ export function ShoesClient({ filter }: ShoesClientProps) {
               clipRule="evenodd"
             />
           </svg>
-          Back to Home
+          <span>Back to Home</span>
         </Link>
       </div>
+
+      {cachingDescription}
 
       {/* Filter Buttons */}
       <div className="mb-10">
